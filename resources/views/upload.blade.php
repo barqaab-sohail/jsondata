@@ -44,7 +44,7 @@
                                                 </input>
                                                 <input type="file" name="document" id="view" data-validation="required" class="form-control" hidden>
 
-                                                <h6 id="h6" class="card-title m-t-10">Click On Image to Add Json<span class="text_requried">*</span></h6>
+                                                <h6 id="h6" class="card-title m-t-10">Click On Image to Add Json File<span class="text_requried">*</span></h6>
                                             </center>
 
                                         </div>
