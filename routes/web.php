@@ -14,7 +14,7 @@ use App\Http\Controllers\JsonController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/uploadJson', function () {
     return view('upload');
 });
 
