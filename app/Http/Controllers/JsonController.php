@@ -67,7 +67,7 @@ class JsonController extends Controller
         $tplId = $pdf->importPage(1);
         $pdf->useTemplate($template);
         $pdf->setFont("helvetica", "", 10);
-        $driverName =  "Driver Name:    " . $users['name'];
+        $driverName =  "Driver Name:    " . $users['name'] ?? "N/A";
         $category =    "Category:          " . $users['Category'];
         $event =       "Event :              " . $users['eventName'];
         $track =       "Track :              " . $users['trackName'];
@@ -89,12 +89,12 @@ class JsonController extends Controller
         $emailData = ['name' => "DigiOasis", 'data' => "Hello DigiOasis"];
         $user['to'] = $email;
         $user['from'] = "digioasis@barqaab.pk";
-        Mail::send('mail', $emailData, function ($messages) use ($user, $outputFile) {
-            $messages->to($user['to']);
-            $messages->from($user['from']);
-            $messages->subject('Template Email from DigiOasis');
-            $messages->attach($outputFile);
-        });
+        // Mail::send('mail', $emailData, function ($messages) use ($user, $outputFile) {
+        //     $messages->to($user['to']);
+        //     $messages->from($user['from']);
+        //     $messages->subject('Template Email from DigiOasis');
+        //     $messages->attach($outputFile);
+        // });
 
         return response()->json(['message' => "Email Send Sucessfully."]);
     }
