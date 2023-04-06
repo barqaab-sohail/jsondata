@@ -14,7 +14,7 @@
         <div id="json_message" align="left"><strong></strong><i hidden class="fas fa-times float-right"></i>
         </div>
         <h3 align="center">Json File Upload</h3>
-        <form id="jsonForm" enctype="multipart/form-data">
+        <form id="jsonForm" enctype="multipart/form-data" method="POST" action="{{route('json.import')}}">
             {{ csrf_field() }}
             <div class="form-group">
                 <table class="table">
@@ -26,10 +26,13 @@
                         <td width="30%" align="left">
                             <input type="submit" name="upload" class="btn btn-success" value="Upload">
                         </td>
+                        <td width="30%" align="left">
+                            <input type="email" name="email" class="btn btn-success">
+                        </td>
                     </tr>
                     <tr>
                         <td width="40%" align="right"></td>
-                        <td width="30"><span class="text-muted">.xls, .xslx Files Only</span></td>
+                        <td width="30"><span class="text-muted">.json File Only</span></td>
                         <td width="30%" align="left"></td>
                     </tr>
                 </table>
@@ -37,63 +40,63 @@
         </form>
     </div>
     <script>
-        $(document).ready(function() {
-            $('#jsonForm').on('submit', function(event) {
-                event.preventDefault();
-                console.log('submit form');
-                url = "{{route('json.import')}}";
-                // $('.fa-spinner').show();
-                submitFormAjax(this, url);
-            }); //end submit
+        // $(document).ready(function() {
+        //     $('#jsonForm').on('submit', function(event) {
+        //         event.preventDefault();
+        //         console.log('submit form');
+        //         url = "{{route('json.import')}}";
+        //         // $('.fa-spinner').show();
+        //         submitFormAjax(this, url);
+        //     }); //end submit
 
-            //ajax function
-            function submitFormAjax(form, url) {
-                //refresh token on each ajax request if this code not added than sendcond time ajax request on same page show earr token mismatched
-                $.ajaxPrefilter(function(options, originalOptions, xhr) { // this will run before each request
-                    var token = $('meta[name="csrf-token"]').attr('content'); // or _token, whichever you are using
+        //     //ajax function
+        //     function submitFormAjax(form, url) {
+        //         //refresh token on each ajax request if this code not added than sendcond time ajax request on same page show earr token mismatched
+        //         $.ajaxPrefilter(function(options, originalOptions, xhr) { // this will run before each request
+        //             var token = $('meta[name="csrf-token"]').attr('content'); // or _token, whichever you are using
 
-                    if (token) {
-                        return xhr.setRequestHeader('X-CSRF-TOKEN', token); // adds directly to the XmlHttpRequest Object
-                    }
-                });
+        //             if (token) {
+        //                 return xhr.setRequestHeader('X-CSRF-TOKEN', token); // adds directly to the XmlHttpRequest Object
+        //             }
+        //         });
 
-                var data = new FormData(form)
+        //         var data = new FormData(form)
 
-                // ajax request
-                $.ajax({
-                    url: url,
-                    method: "POST",
-                    data: data,
-                    dataType: 'JSON',
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    success: function(data) {
+        //         // ajax request
+        //         $.ajax({
+        //             url: url,
+        //             method: "POST",
+        //             data: data,
+        //             dataType: 'JSON',
+        //             contentType: false,
+        //             cache: false,
+        //             processData: false,
+        //             success: function(data) {
 
-                        $('#json_message').html('<div id="json_message" class="alert alert-success" align="left"><a href="#" class="close" data-dismiss="alert">&times;</a><strong>' + data.message + '</strong></div>');
-
-
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
+        //                 $('#json_message').html('<div id="json_message" class="alert alert-success" align="left"><a href="#" class="close" data-dismiss="alert">&times;</a><strong>' + data.message + '</strong></div>');
 
 
-                        var test = jqXHR.responseJSON // this object have two more objects one is errors and other is message.
+        //             },
+        //             error: function(jqXHR, textStatus, errorThrown) {
 
-                        var errorMassage = '';
 
-                        //now saperate only errors object values from test object and store in variable errorMassage;
-                        $.each(test.errors, function(key, value) {
-                            errorMassage += value + '<br>';
-                        });
+        //                 var test = jqXHR.responseJSON // this object have two more objects one is errors and other is message.
 
-                        $('#json_message').html('<div id="json_message" class="alert alert-danger" align="left"><a href="#" class="close" data-dismiss="alert">&times;</a><strong>' + errorMassage + '</strong></div>');
-                        $('html,body').scrollTop(0);
-                        $('.fa-spinner').hide();
+        //                 var errorMassage = '';
 
-                    } //end error
-                }); //end ajax
-            }
-        });
+        //                 //now saperate only errors object values from test object and store in variable errorMassage;
+        //                 $.each(test.errors, function(key, value) {
+        //                     errorMassage += value + '<br>';
+        //                 });
+
+        //                 $('#json_message').html('<div id="json_message" class="alert alert-danger" align="left"><a href="#" class="close" data-dismiss="alert">&times;</a><strong>' + errorMassage + '</strong></div>');
+        //                 $('html,body').scrollTop(0);
+        //                 $('.fa-spinner').hide();
+
+        //             } //end error
+        //         }); //end ajax
+        //     }
+        // });
     </script>
 </body>
 

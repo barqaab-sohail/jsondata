@@ -15,7 +15,8 @@ use App\Http\Controllers\JsonController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('upload');
 });
 
 Route::post('/import', [JsonController::class, 'import'])->name('json.import');
+Route::get('pdfData',  [JsonController::class, 'index']);
