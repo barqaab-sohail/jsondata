@@ -1,7 +1,7 @@
 @extends('layouts.master.master')
 @section('title', 'DigiOasis')
 @section('Heading')
-<h3 class="text-themecolor">Upload Json File</h3>
+<h3 class="text-themecolor"></h3>
 
 @stop
 @section('content')
@@ -19,7 +19,7 @@
                             @csrf
                             <div class="form-body">
 
-                                <h3 class="box-title">Json File Upload</h3>
+                                <h3 class="box-title">Upload Json File</h3>
 
                                 <hr class="m-t-0 m-b-40">
 
@@ -30,7 +30,7 @@
                                             <div class="col-md-12">
                                                 <label class="control-label text-right">Email</label>
 
-                                                <input type="email" id="email" name="email" value="{{ old('email') }}" class="form-control exempted" data-validation="required email">
+                                                <input type="email" id="email" name="email" value="{{ old('email') }}" class="form-control exempted" data-validation="required email" autocomplete="off">
 
                                             </div>
                                         </div>

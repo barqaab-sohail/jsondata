@@ -12,7 +12,7 @@ class JsonController extends Controller
     public function index()
     {
         $filePath = public_path("test.pdf");
-        $outputFilePath = public_path("output.pdf");
+        $outputFilePath = public_path("templatePdf.pdf");
         $this->fillPDFFile($filePath, $outputFilePath);
         return response()->file($outputFilePath);
     }
@@ -55,7 +55,7 @@ class JsonController extends Controller
         }
 
         $inputFile = public_path("test.pdf");
-        $outputFile = public_path("output.pdf");
+        $outputFile = public_path("templatePdf.pdf");
 
         $pdf = new Fpdi();
 
@@ -88,9 +88,11 @@ class JsonController extends Controller
 
         $emailData = ['name' => "DigiOasis", 'data' => "Hello DigiOasis"];
         $user['to'] = $email;
+        $user['from'] = "digioasis@barqaab.pk";
         Mail::send('mail', $emailData, function ($messages) use ($user, $outputFile) {
             $messages->to($user['to']);
-            $messages->subject('Hello DigiOasis from Subject');
+            $messages->from($user['from']);
+            $messages->subject('Template Email from DigiOasis');
             $messages->attach($outputFile);
         });
 

@@ -86,8 +86,8 @@
     <div id="main-wrapper">
 
         @include('layouts.master.adminHeader')
-
-        <div class="page-wrapper">
+        <!--  Following Div remove this class="page-wrapper"-->
+        <div>
             <!-- ============================================================== -->
             <!-- Container fluid  -->
             <!-- ============================================================== -->
